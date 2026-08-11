@@ -1,12 +1,14 @@
-HERITAGE GARAGE — TEST APP V2
+HERITAGE GARAGE — TEST APP V3
 
 Changes:
-- Proper HG gold-on-green app icon
-- Apple Home Screen icon support
-- Web app manifest
-- New My Garage landing screen
-- Two sample vehicles
-- Vehicle selection updates the Vehicle Passport
-- Existing Passport, Provenance, Document Vault, Maintenance, Gallery and Assistance retained
+- Real Add Vehicle form
+- Vehicles saved locally on the device/browser
+- My Garage list built from vehicles the user adds
+- Vehicle Passport displays selected vehicle data
+- Delete test vehicle option
+- Bottom navigation spacing fixed
+- Proper HG icon and web app manifest retained
 
-All information is test/sample data.
+Important:
+This remains a public test website. Do not add confidential documents or sensitive personal data.
+Vehicle information entered into the form is stored locally in the browser on that device and is not uploaded to GitHub.
