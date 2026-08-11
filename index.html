@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#10251f">
+<title>Heritage Garage — Test App</title>
+<style>
+:root{
+  --bg:#111412; --panel:#1a1f1b; --green:#183a30; --green2:#245343;
+  --gold:#c8a96b; --cream:#efe5d2; --muted:#a9ada8; --line:#303831;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#0f1210,#151a16);color:var(--cream)}
+.app{max-width:720px;margin:0 auto;min-height:100vh;padding:calc(18px + env(safe-area-inset-top)) 16px calc(88px + env(safe-area-inset-bottom))}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.badge{width:48px;height:48px;border:1px solid var(--gold);border-radius:14px;display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;font-size:22px}
+h1{font:600 26px/1.05 Georgia,serif;margin:0}.sub{color:var(--muted);font-size:13px;margin-top:4px}
+.hero{background:linear-gradient(145deg,var(--green),#0f1b17);border:1px solid #355447;border-radius:22px;padding:20px;margin:10px 0 18px}
+.kicker{color:var(--gold);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.hero h2{font:600 30px/1.05 Georgia,serif;margin:8px 0}.hero p{color:#d9d6cc;margin:5px 0 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;min-height:118px;cursor:pointer}
+.card:active{transform:scale(.99)} .icon{font-size:26px}.card h3{margin:10px 0 5px;font-size:16px}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.35}
+.section{display:none}.section.active{display:block}.home.hidden{display:none}
+.topbar{display:flex;align-items:center;gap:10px;margin-bottom:16px}.back{border:1px solid var(--line);background:#171b18;color:var(--cream);border-radius:12px;padding:10px 12px;font-size:16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
+.label{color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.1em}.value{font-size:17px;margin-top:5px}
+.timeline{border-left:2px solid var(--gold);padding-left:16px;margin-left:6px}.event{margin:0 0 18px}.event b{display:block}.event span{color:var(--muted);font-size:13px}
+.doc{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.doc:last-child{border-bottom:0}
+.pill{font-size:11px;border:1px solid #52685d;color:#cbd6cf;border-radius:999px;padding:5px 8px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(16,19,17,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+.navin{max-width:720px;margin:auto;display:flex;justify-content:space-around}.nav button{background:none;border:0;color:var(--muted);font-size:11px}.nav button strong{display:block;color:var(--cream);font-size:20px;margin-bottom:2px}
+.note{margin-top:16px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:430px){.hero h2{font-size:27px}.card{min-height:112px;padding:14px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div id="home" class="home">
+    <div class="brand"><div class="badge">HG</div><div><h1>Heritage Garage</h1><div class="sub">Preserve the story. Protect the provenance.</div></div></div>
+    <div class="hero">
+      <div class="kicker">My Garage</div>
+      <h2>1930s British Classic</h2>
+      <p>Digital vehicle passport • Test profile</p>
+    </div>
+    <div class="grid">
+      <div class="card" onclick="openSection('passport')"><div class="icon">🛡️</div><h3>Vehicle Passport</h3><p>Identity, numbers, ownership and verification.</p></div>
+      <div class="card" onclick="openSection('provenance')"><div class="icon">🕰️</div><h3>Provenance</h3><p>Chronological history and ownership timeline.</p></div>
+      <div class="card" onclick="openSection('documents')"><div class="icon">📜</div><h3>Document Vault</h3><p>Registration, invoices, certificates and records.</p></div>
+      <div class="card" onclick="openSection('maintenance')"><div class="icon">🔧</div><h3>Maintenance</h3><p>Service, repairs and restoration history.</p></div>
+      <div class="card" onclick="openSection('gallery')"><div class="icon">📷</div><h3>Gallery</h3><p>Period photographs and restoration images.</p></div>
+      <div class="card" onclick="openSection('assistance')"><div class="icon">☎️</div><h3>Assistance</h3><p>Insurance and roadside support information.</p></div>
+    </div>
+    <div class="note">Prototype only — sample information is used for testing.</div>
+  </div>
+
+  <div id="passport" class="section">
+    <div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Vehicle Passport</h1></div>
+    <div class="panel"><div class="label">Vehicle</div><div class="value">1930s British Classic — Test Vehicle</div></div>
+    <div class="panel"><div class="label">Chassis number</div><div class="value">HG-TEST-001</div></div>
+    <div class="panel"><div class="label">Engine number</div><div class="value">ENG-TEST-001</div></div>
+    <div class="panel"><div class="label">Verification status</div><div class="value">✓ Owner supplied — awaiting club verification</div></div>
+  </div>
+
+  <div id="provenance" class="section">
+    <div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Provenance</h1></div>
+    <div class="panel timeline">
+      <div class="event"><b>1938 — First registration</b><span>Original delivery record placeholder.</span></div>
+      <div class="event"><b>1974 — Ownership change</b><span>Supporting document can be attached.</span></div>
+      <div class="event"><b>2008 — Restoration</b><span>Body, trim and mechanical work recorded.</span></div>
+      <div class="event"><b>2026 — Heritage Garage passport created</b><span>Digital record established.</span></div>
+    </div>
+  </div>
+
+  <div id="documents" class="section">
+    <div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Document Vault</h1></div>
+    <div class="panel">
+      <div class="doc"><span>Registration certificate</span><span class="pill">Sample</span></div>
+      <div class="doc"><span>Restoration invoices</span><span class="pill">3 files</span></div>
+      <div class="doc"><span>Heritage certificate</span><span class="pill">Pending</span></div>
+      <div class="doc"><span>Valuation</span><span class="pill">2026</span></div>
+    </div>
+  </div>
+
+  <div id="maintenance" class="section">
+    <div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Maintenance</h1></div>
+    <div class="panel"><div class="label">12 Jul 2026</div><div class="value">Annual inspection completed</div></div>
+    <div class="panel"><div class="label">02 Feb 2026</div><div class="value">Oil, filters and lubrication service</div></div>
+    <div class="panel"><div class="label">Next action</div><div class="value">Brake inspection due in 5 months</div></div>
+  </div>
+
+  <div id="gallery" class="section">
+    <div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Gallery</h1></div>
+    <div class="grid">
+      <div class="panel">📷<br><br>Front three-quarter</div><div class="panel">📷<br><br>Dashboard</div>
+      <div class="panel">📷<br><br>Engine bay</div><div class="panel">📷<br><br>Historic image</div>
+    </div>
+  </div>
+
+  <div id="assistance" class="section">
+    <div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Insurance & Assistance</h1></div>
+    <div class="panel"><div class="label">Insurance</div><div class="value">Classic vehicle policy — test details</div></div>
+    <div class="panel"><div class="label">Roadside assistance</div><div class="value">Specialist recovery service — test contact</div></div>
+    <div class="panel"><div class="label">Emergency information</div><div class="value">Owner-selected contacts would appear here.</div></div>
+  </div>
+</div>
+
+<div class="nav">
+ <div class="navin">
+  <button onclick="goHome()"><strong>⌂</strong>Garage</button>
+  <button onclick="openSection('passport')"><strong>♜</strong>Passport</button>
+  <button onclick="openSection('documents')"><strong>▤</strong>Vault</button>
+  <button onclick="openSection('assistance')"><strong>☎</strong>Assist</button>
+ </div>
+</div>
+
+<script>
+function openSection(id){
+ document.getElementById('home').classList.add('hidden');
+ document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ window.scrollTo(0,0);
+}
+function goHome(){
+ document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
+ document.getElementById('home').classList.remove('hidden');
+ window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
