@@ -1,154 +1,94 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0d2f27">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d2f27"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Heritage Garage">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="manifest" href="manifest.webmanifest">
-<title>Heritage Garage</title>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><title>Heritage Garage</title>
 <style>
-:root{--bg:#0d110f;--panel:#161c18;--green:#12392f;--green2:#1b4b3e;--gold:#c8a96b;--cream:#efe5d2;--muted:#aab0ab;--line:#304138;--danger:#a64c42}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input,textarea{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding:calc(22px + env(safe-area-inset-top)) 18px calc(150px + env(safe-area-inset-bottom))}
-.brand{display:flex;gap:14px;align-items:center;margin-bottom:22px}.logo{width:62px;height:62px;border:2px solid var(--gold);border-radius:20px;display:grid;place-items:center;color:var(--gold);font:700 29px Georgia,serif}
-h1,h2{font-family:Georgia,serif}h1{font-size:30px;margin:0}.sub{color:var(--muted);font-size:14px;margin-top:4px}
-.hero{background:linear-gradient(145deg,var(--green2),#10251e);border:1px solid #416252;border-radius:24px;padding:20px;margin-bottom:18px}.kicker{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}.hero h2{font-size:32px;margin:8px 0 5px}.hero p{margin:0;color:#d8d5cc}
-.garage-list{display:grid;gap:12px}.vehicle{display:grid;grid-template-columns:74px 1fr auto;gap:14px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:14px}.vehicle-thumb{width:74px;height:58px;border-radius:14px;background:linear-gradient(145deg,#29483d,#12231d);display:grid;place-items:center;font-size:29px}.vehicle h3{margin:0 0 4px;font-size:17px}.vehicle p{margin:0;color:var(--muted);font-size:13px}.chev{font-size:24px;color:var(--gold)}
-.primary,.secondary,.danger{display:block;width:100%;border-radius:15px;padding:14px;font-weight:600;font-size:15px}.primary{border:1px solid var(--gold);background:#183a30;color:var(--cream);margin-top:14px}.secondary{border:1px solid var(--line);background:var(--panel);color:var(--cream);margin-top:10px}.danger{border:1px solid #7f423a;background:#3b211e;color:#ffd8d3;margin-top:10px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px;min-height:122px}.icon{font-size:27px}.card h3{font-size:16px;margin:10px 0 5px}.card p{font-size:13px;line-height:1.35;color:var(--muted);margin:0}
-.section{display:none}.section.active{display:block}.hidden{display:none!important}.topbar{display:flex;align-items:center;gap:12px;margin-bottom:16px}.back{border:1px solid var(--line);background:var(--panel);color:var(--cream);border-radius:12px;padding:10px 13px;font-size:16px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}.label{color:var(--gold);font-size:11px;letter-spacing:.12em;text-transform:uppercase}.value{font-size:17px;margin-top:5px}
-.timeline{border-left:2px solid var(--gold);padding-left:16px;margin-left:5px}.event{margin-bottom:18px}.event b{display:block}.event span{font-size:13px;color:var(--muted)}
-.doc{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.doc:last-child{border-bottom:0}.pill{font-size:11px;border:1px solid #4e685b;border-radius:999px;padding:5px 8px;color:#d0d9d3}
-.note{font-size:12px;color:var(--muted);text-align:center;margin:18px 0 0}
-.form label{display:block;color:var(--gold);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin:14px 0 6px}.form input,.form textarea{width:100%;border:1px solid var(--line);background:#111713;color:var(--cream);border-radius:12px;padding:12px}.form textarea{min-height:90px;resize:vertical}
-.empty{padding:24px;text-align:center;background:var(--panel);border:1px dashed #3e5549;border-radius:20px;color:var(--muted)}
-.nav{position:fixed;left:0;right:0;bottom:0;border-top:1px solid var(--line);background:rgba(13,17,15,.97);backdrop-filter:blur(14px);padding:9px 12px calc(12px + env(safe-area-inset-bottom));z-index:50}.navin{max-width:760px;margin:auto;display:flex;justify-content:space-around}.nav button{background:none;border:0;color:var(--muted);font-size:11px}.nav button strong{display:block;font-size:20px;color:var(--cream);margin-bottom:2px}
-@media(max-width:430px){.vehicle{grid-template-columns:62px 1fr auto}.vehicle-thumb{width:62px;height:54px}.hero h2{font-size:29px}}
-</style>
-</head>
-<body>
+:root{--bg:#0d110f;--p:#161c18;--g:#183a30;--g2:#245343;--gold:#c8a96b;--c:#efe5d2;--m:#aab0ab;--l:#304138}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--c);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,textarea{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding:calc(22px + env(safe-area-inset-top)) 18px calc(145px + env(safe-area-inset-bottom))}
+.brand{display:flex;gap:14px;align-items:center;margin-bottom:20px}.logo{width:62px;height:62px;border:2px solid var(--gold);border-radius:20px;display:grid;place-items:center;color:var(--gold);font:700 29px Georgia,serif}
+h1,h2{font-family:Georgia,serif}h1{margin:0}.sub,.small{color:var(--m);font-size:13px;line-height:1.45}.hero,.panel,.vehicle,.method{background:var(--p);border:1px solid var(--l);border-radius:19px;padding:16px;margin-bottom:12px}.hero{background:linear-gradient(145deg,var(--g2),#10251e)}.k{color:var(--gold);font-size:11px;letter-spacing:.13em;text-transform:uppercase}.hero h2{margin:7px 0;font-size:28px}.hero p{margin:0;color:#d9d6ce}
+.primary,.secondary,.danger{width:100%;padding:14px;border-radius:14px;font-weight:650}.primary{background:var(--g);border:1px solid var(--gold);color:var(--c)}.secondary{margin-top:9px;background:var(--p);border:1px solid var(--l);color:var(--c)}.danger{margin-top:9px;background:#3b211e;border:1px solid #77443d;color:#ffd8d2}
+label{display:block;color:var(--gold);font-size:11px;text-transform:uppercase;margin:13px 0 5px}input,textarea{width:100%;padding:12px;border-radius:11px;border:1px solid var(--l);background:#111713;color:var(--c)}textarea{min-height:76px}
+.section{display:none}.active{display:block}.hidden{display:none!important}.top{display:flex;gap:10px;align-items:center;margin-bottom:14px}.back{padding:10px;border-radius:11px;border:1px solid var(--l);background:var(--p);color:var(--c)}
+.vehicle{display:grid;grid-template-columns:58px 1fr auto;gap:11px;align-items:center}.thumb{width:58px;height:50px;border-radius:11px;background:#213d33;display:grid;place-items:center;font-size:24px}.vehicle h3{margin:0 0 3px}.vehicle p{margin:0;font-size:12px;color:var(--m)}.chev{font-size:24px;color:var(--gold)}
+.method{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center}.method .ico{font-size:24px}.method b{display:block}.method span{font-size:12px;color:var(--m)}
+.empty{text-align:center;border:1px dashed #40564a;border-radius:18px;padding:22px;color:var(--m);margin-bottom:12px}.tag{display:inline-block;border:1px solid #607265;border-radius:999px;padding:5px 8px;font-size:11px;margin:4px 4px 0 0}.infer{border-color:#806f43;color:#ead59d}.owner{border-color:#4e6b7c;color:#bcd8e8}
+.evidence{border-left:3px solid var(--gold)}.ev{padding:11px 0;border-bottom:1px solid var(--l)}.ev:last-child{border-bottom:0}.status{font-size:12px;color:#e0cb92;margin-top:4px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#0d110ff5;border-top:1px solid var(--l);padding:9px 12px calc(12px + env(safe-area-inset-bottom));z-index:20}.navin{max-width:760px;margin:auto;display:flex;justify-content:space-around}.nav button{background:none;border:0;color:var(--m);font-size:11px}.nav strong{display:block;color:var(--c);font-size:20px}
+.spinner{display:inline-block;width:15px;height:15px;border:2px solid #66786d;border-top-color:var(--gold);border-radius:50%;animation:s .8s linear infinite;vertical-align:-3px}@keyframes s{to{transform:rotate(360deg)}}pre{white-space:pre-wrap;word-break:break-word}
+</style></head><body>
 <div class="app">
+<div id="setup">
+  <div class="brand"><div class="logo">HG</div><div><h1>Heritage Garage</h1><div class="sub">Private Pilot V4</div></div></div>
+  <div class="hero"><div class="k">One-time setup</div><h2>Connect Supabase</h2><p>Paste the project URL and browser-safe publishable key. Never paste your OpenAI secret here.</p></div>
+  <div class="panel"><label>Supabase Project URL</label><input id="cfgUrl" placeholder="https://xxxxx.supabase.co" autocapitalize="none"><label>Publishable key</label><textarea id="cfgKey" placeholder="sb_publishable_..." autocapitalize="none"></textarea><button class="primary" style="margin-top:14px" onclick="saveCfg()">Save & Connect</button></div>
+</div>
+
+<div id="login" class="hidden">
+ <div class="brand"><div class="logo">HG</div><div><h1>Heritage Garage</h1><div class="sub">Private Pilot V4</div></div></div>
+ <div class="hero"><div class="k">Private collection</div><h2>Sign in</h2><p>Use the Supabase user account created for the pilot.</p></div>
+ <div class="panel"><label>Email</label><input id="email" type="email"><label>Password</label><input id="pw" type="password"><button class="primary" style="margin-top:14px" onclick="signIn()">Sign In</button><div id="loginMsg" class="small" style="margin-top:10px"></div><button class="secondary" onclick="resetCfg()">Backend Settings</button></div>
+</div>
+
+<div id="main" class="hidden">
 <div id="home">
-<div class="brand"><div class="logo">HG</div><div><h1>Heritage Garage</h1><div class="sub">Preserve the story. Protect the provenance.</div></div></div>
-<div class="hero"><div class="kicker">My Garage</div><h2>Your heritage vehicles</h2><p>Add your own cars and build a living digital record for each one.</p></div>
-
-<div id="garageList" class="garage-list"></div>
-<button class="primary" onclick="openAddVehicle()">＋ Add Vehicle</button>
-
-<div style="height:18px"></div>
-<div class="grid">
-<div class="card" onclick="openSection('passport')"><div class="icon">🛡️</div><h3>Vehicle Passport</h3><p>Identity, numbers, ownership and verification.</p></div>
-<div class="card" onclick="openSection('provenance')"><div class="icon">🕰️</div><h3>Provenance</h3><p>Chronological history and ownership timeline.</p></div>
-<div class="card" onclick="openSection('documents')"><div class="icon">📜</div><h3>Document Vault</h3><p>Registration, invoices, certificates and records.</p></div>
-<div class="card" onclick="openSection('maintenance')"><div class="icon">🔧</div><h3>Maintenance</h3><p>Service, repairs and restoration history.</p></div>
-<div class="card" onclick="openSection('gallery')"><div class="icon">📷</div><h3>Gallery</h3><p>Period photographs and restoration images.</p></div>
-<div class="card" onclick="openSection('assistance')"><div class="icon">☎️</div><h3>Assistance</h3><p>Insurance and roadside support information.</p></div>
-</div>
-<div class="note">Test build. Vehicle details you add are stored only on this device/browser.</div>
+ <div class="brand"><div class="logo">HG</div><div><h1>Heritage Garage</h1><div class="sub">An evidence-based record of a vehicle's history.</div></div></div>
+ <div class="hero"><div class="k">Two-vehicle pilot</div><h2>My Garage</h2><p>Real AI/OCR, but every inference remains evidence—not fact—until reviewed.</p></div>
+ <div id="garage"></div><button id="addBtn" class="primary" onclick="show('add')">＋ Add Vehicle</button>
+ <div class="panel" style="margin-top:16px"><div class="k">Core principle</div><p class="small">Heritage Garage never silently turns an educated guess, AI suggestion or OCR reading into historical fact.</p></div>
+ <button class="secondary" onclick="signOut()">Sign Out</button>
 </div>
 
-<div id="addVehicle" class="section">
-<div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Add Vehicle</h1></div>
-<div class="panel form">
-<label>Vehicle name *</label><input id="fName" placeholder="e.g. 1938 MG VA Tickford">
-<label>Year</label><input id="fYear" inputmode="numeric" placeholder="1938">
-<label>Make</label><input id="fMake" placeholder="MG">
-<label>Model</label><input id="fModel" placeholder="VA Tickford Drophead Coupé">
-<label>Chassis number</label><input id="fChassis" placeholder="Chassis number">
-<label>Engine number</label><input id="fEngine" placeholder="Engine number">
-<label>Registration</label><input id="fReg" placeholder="Registration number">
-<label>Notes</label><textarea id="fNotes" placeholder="Short notes about the vehicle"></textarea>
-<button class="primary" onclick="saveVehicle()">Save Vehicle</button>
-<button class="secondary" onclick="goHome()">Cancel</button>
-</div>
-</div>
+<div id="add" class="section"><div class="top"><button class="back" onclick="goHome()">‹ Back</button><h1>Add Vehicle</h1></div>
+<div class="hero"><div class="k">Choose how to begin</div><h2>Build the identity</h2><p>Start manually, then add AI/OCR evidence at any time.</p></div>
+<div class="method" onclick="show('manual')"><div class="ico">⌨️</div><div><b>Enter details myself</b><span>Owner-supplied information</span></div><div class="chev">›</div></div>
+<div class="method" onclick="startScan('vehicle_photo')"><div class="ico">📷</div><div><b>AI vehicle photo</b><span>Possible make, model and year range</span></div><div class="chev">›</div></div>
+<div class="method" onclick="startScan('identifier_plate')"><div class="ico">▣</div><div><b>OCR chassis / identity plate</b><span>Observed characters with uncertainty</span></div><div class="chev">›</div></div>
+<div class="method" onclick="startScan('document')"><div class="ico">📜</div><div><b>Analyse document image</b><span>Source-linked possible claims</span></div><div class="chev">›</div></div></div>
 
-<div id="passport" class="section">
-<div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Vehicle Passport</h1></div>
-<div id="passportEmpty" class="empty hidden">Add or select a vehicle in My Garage first.</div>
-<div id="passportData">
-<div class="panel"><div class="label">Vehicle</div><div id="vname" class="value"></div></div>
-<div class="panel"><div class="label">Year / Make / Model</div><div id="vdetails" class="value"></div></div>
-<div class="panel"><div class="label">Chassis number</div><div id="vchassis" class="value"></div></div>
-<div class="panel"><div class="label">Engine number</div><div id="vengine" class="value"></div></div>
-<div class="panel"><div class="label">Registration</div><div id="vreg" class="value"></div></div>
-<div class="panel"><div class="label">Notes</div><div id="vnotes" class="value"></div></div>
-<div class="panel"><div class="label">Verification status</div><div class="value">Owner supplied — not independently verified</div></div>
-<button class="danger" onclick="deleteCurrentVehicle()">Delete this test vehicle</button>
-</div>
-</div>
+<div id="manual" class="section"><div class="top"><button class="back" onclick="show('add')">‹ Back</button><h1>Manual Entry</h1></div>
+<div class="panel"><span class="tag owner">Owner supplied</span><label>Vehicle name *</label><input id="n"><label>Year</label><input id="y"><label>Make</label><input id="mk"><label>Model</label><input id="mo"><label>Chassis / VIN</label><input id="ch"><label>Engine</label><input id="en"><label>Registration</label><input id="rg"><label>Notes</label><textarea id="nt"></textarea><button class="primary" style="margin-top:14px" onclick="saveManual()">Save Vehicle</button></div></div>
 
-<div id="provenance" class="section"><div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Provenance</h1></div><div class="panel timeline"><div class="event"><b>Original delivery</b><span>Factory or dealer record can be added here.</span></div><div class="event"><b>Ownership history</b><span>Previous owners and supporting documents.</span></div><div class="event"><b>Restoration</b><span>Body, trim and mechanical work.</span></div><div class="event"><b>Heritage Garage record</b><span>Digital history created for the selected vehicle.</span></div></div></div>
+<div id="scan" class="section"><div class="top"><button class="back" onclick="show('add')">‹ Back</button><h1 id="scanTitle">AI / OCR</h1></div>
+<div class="panel"><div class="k">Evidence capture</div><h2 id="scanHead"></h2><p id="scanText" class="small"></p><input id="pic" type="file" accept="image/*" capture="environment" style="margin:14px 0;width:100%"><button class="primary" onclick="analyse()">Analyse Evidence</button><div id="msg" class="small" style="margin-top:10px"></div></div><div id="result"></div></div>
 
-<div id="documents" class="section"><div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Document Vault</h1></div><div class="panel"><div class="doc"><span>Registration certificate</span><span class="pill">Future upload</span></div><div class="doc"><span>Restoration invoices</span><span class="pill">Future upload</span></div><div class="doc"><span>Heritage certificate</span><span class="pill">Future upload</span></div><div class="doc"><span>Valuation</span><span class="pill">Future upload</span></div></div><div class="note">For this public test build, do not upload confidential documents.</div></div>
-
-<div id="maintenance" class="section"><div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Maintenance</h1></div><div class="panel"><div class="label">Service history</div><div class="value">Maintenance entry workflow coming next.</div></div></div>
-<div id="gallery" class="section"><div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Gallery</h1></div><div class="panel"><div class="label">Vehicle photographs</div><div class="value">Photo upload workflow coming next.</div></div></div>
-<div id="assistance" class="section"><div class="topbar"><button class="back" onclick="goHome()">‹ Back</button><h1>Insurance & Assistance</h1></div><div class="panel"><div class="label">Insurance</div><div class="value">Classic vehicle policy details can be linked here.</div></div><div class="panel"><div class="label">Roadside assistance</div><div class="value">Specialist recovery details can be stored here.</div></div></div>
-</div>
-
-<div class="nav"><div class="navin">
-<button onclick="goHome()"><strong>⌂</strong>Garage</button>
-<button onclick="openSection('passport')"><strong>♜</strong>Passport</button>
-<button onclick="openSection('documents')"><strong>▤</strong>Vault</button>
-<button onclick="openSection('assistance')"><strong>☎</strong>Assist</button>
+<div id="record" class="section"><div class="top"><button class="back" onclick="goHome()">‹ Back</button><h1>Vehicle Record</h1></div>
+<div id="rempty" class="empty">Select or add a vehicle first.</div><div id="rdata" class="hidden"><div class="panel"><div class="k">Vehicle identity</div><h2 id="rname"></h2><div id="rstatus" class="status"></div></div><div class="panel"><div class="k">Recorded details</div><div id="rdetails" class="small"></div></div><div class="panel evidence"><div class="k">Evidence ledger</div><div id="revidence"></div></div><button class="danger" onclick="delCar()">Delete pilot vehicle</button></div></div>
 </div></div>
 
-<script>
-const STORE='heritageGarageVehiclesV3';
-const SELECTED='heritageGarageSelectedV3';
-let vehicles=[];
-let selectedId=null;
+<div id="nav" class="nav hidden"><div class="navin"><button onclick="goHome()"><strong>⌂</strong>Garage</button><button onclick="show('add')"><strong>＋</strong>Add</button><button onclick="show('record');syncRecord()"><strong>♜</strong>Record</button><button onclick="alert('Independent club certification comes later.')"><strong>✓</strong>Provenance</button></div></div>
 
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function load(){
-  try{vehicles=JSON.parse(localStorage.getItem(STORE)||'[]')}catch(e){vehicles=[]}
-  selectedId=localStorage.getItem(SELECTED)||null;
-  if(selectedId && !vehicles.some(v=>v.id===selectedId)) selectedId=null;
-  renderGarage(); syncPassport();
-}
-function saveAll(){localStorage.setItem(STORE,JSON.stringify(vehicles)); if(selectedId)localStorage.setItem(SELECTED,selectedId); else localStorage.removeItem(SELECTED)}
-function renderGarage(){
-  const el=document.getElementById('garageList');
-  if(!vehicles.length){el.innerHTML='<div class="empty">No vehicles yet.<br><br>Tap <b>+ Add Vehicle</b> to create your first Heritage Garage record.</div>';return}
-  el.innerHTML=vehicles.map(v=>`<div class="vehicle" onclick="selectVehicle('${v.id}')"><div class="vehicle-thumb">🚘</div><div><h3>${esc(v.name)}</h3><p>${esc([v.year,v.make,v.model].filter(Boolean).join(' • ')||'Vehicle record')}</p></div><div class="chev">›</div></div>`).join('');
-}
-function selectedVehicle(){return vehicles.find(v=>v.id===selectedId)||null}
-function syncPassport(){
-  const v=selectedVehicle(), empty=document.getElementById('passportEmpty'), data=document.getElementById('passportData');
-  if(!v){empty.classList.remove('hidden');data.classList.add('hidden');return}
-  empty.classList.add('hidden');data.classList.remove('hidden');
-  document.getElementById('vname').textContent=v.name||'—';
-  document.getElementById('vdetails').textContent=[v.year,v.make,v.model].filter(Boolean).join(' • ')||'—';
-  document.getElementById('vchassis').textContent=v.chassis||'—';
-  document.getElementById('vengine').textContent=v.engine||'—';
-  document.getElementById('vreg').textContent=v.reg||'—';
-  document.getElementById('vnotes').textContent=v.notes||'—';
-}
-function openAddVehicle(){
-  ['fName','fYear','fMake','fModel','fChassis','fEngine','fReg','fNotes'].forEach(id=>document.getElementById(id).value='');
-  openSection('addVehicle');
-}
-function saveVehicle(){
-  const name=document.getElementById('fName').value.trim();
-  if(!name){alert('Please enter a vehicle name.');return}
-  const v={id:'v'+Date.now(),name,year:fYear.value.trim(),make:fMake.value.trim(),model:fModel.value.trim(),chassis:fChassis.value.trim(),engine:fEngine.value.trim(),reg:fReg.value.trim(),notes:fNotes.value.trim()};
-  vehicles.unshift(v);selectedId=v.id;saveAll();renderGarage();syncPassport();openSection('passport');
-}
-function selectVehicle(id){selectedId=id;saveAll();syncPassport();openSection('passport')}
-function deleteCurrentVehicle(){
-  const v=selectedVehicle(); if(!v)return;
-  if(!confirm('Delete "'+v.name+'" from this test device?'))return;
-  vehicles=vehicles.filter(x=>x.id!==selectedId);selectedId=vehicles[0]?.id||null;saveAll();renderGarage();syncPassport();goHome();
-}
-function openSection(id){document.getElementById('home').classList.add('hidden');document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
-function goHome(){document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById('home').classList.remove('hidden');renderGarage();scrollTo(0,0)}
-load();
-</script>
-</body>
-</html>
+<script>
+const CK='hg4cfg',VK='hg4cars',SK='hg4sel';let sb=null,cars=[],sel='',mode='',last=null;
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+function cfg(){try{return JSON.parse(localStorage.getItem(CK)||'null')}catch(e){return null}}
+function saveCfg(){let u=cfgUrl.value.trim(),k=cfgKey.value.trim();if(!u||!k){alert('Enter both Supabase values.');return}localStorage.setItem(CK,JSON.stringify({u,k}));boot()}
+function resetCfg(){localStorage.removeItem(CK);location.reload()}
+function makeSb(){let c=cfg();sb=window.supabase.createClient(c.u,c.k,{auth:{persistSession:true,autoRefreshToken:true}})}
+async function boot(){let c=cfg();if(!c)return;setup.classList.add('hidden');makeSb();let {data:{session}}=await sb.auth.getSession();if(session)enter();else login.classList.remove('hidden')}
+async function signIn(){loginMsg.innerHTML='<span class="spinner"></span> Signing in…';let {error}=await sb.auth.signInWithPassword({email:email.value.trim(),password:pw.value});if(error){loginMsg.textContent=error.message;return}enter()}
+async function signOut(){await sb.auth.signOut();location.reload()}
+function enter(){login.classList.add('hidden');main.classList.remove('hidden');nav.classList.remove('hidden');load();goHome()}
+function load(){try{cars=JSON.parse(localStorage.getItem(VK)||'[]')}catch(e){cars=[]}sel=localStorage.getItem(SK)||'';render();syncRecord()}
+function persist(){localStorage.setItem(VK,JSON.stringify(cars));sel?localStorage.setItem(SK,sel):localStorage.removeItem(SK)}
+function cur(){return cars.find(x=>x.id===sel)}
+function render(){garage.innerHTML=cars.length?cars.map(v=>`<div class="vehicle" onclick="selectCar('${v.id}')"><div class="thumb">🚘</div><div><h3>${esc(v.name)}</h3><p>${esc([v.year,v.make,v.model].filter(Boolean).join(' • '))}</p><div class="status">${esc(v.status)}</div></div><div class="chev">›</div></div>`).join(''):'<div class="empty">No pilot vehicles yet.</div>';addBtn.disabled=cars.length>=2;addBtn.textContent=cars.length>=2?'Two-vehicle limit reached':'＋ Add Vehicle';addBtn.style.opacity=cars.length>=2?'.55':'1'}
+function show(id){home.style.display='none';document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
+function goHome(){document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));home.style.display='block';render();scrollTo(0,0)}
+function saveManual(){if(cars.length>=2)return alert('Pilot limited to two vehicles.');if(!n.value.trim())return alert('Enter vehicle name.');let v={id:'v'+Date.now(),name:n.value.trim(),year:y.value.trim(),make:mk.value.trim(),model:mo.value.trim(),chassis:ch.value.trim(),engine:en.value.trim(),reg:rg.value.trim(),notes:nt.value.trim(),status:'Owner supplied — not independently verified',evidence:[{claim:'Initial details',source:'Manual owner entry',status:'Owner supplied — not independently verified'}]};cars.unshift(v);sel=v.id;persist();syncRecord();show('record')}
+function selectCar(id){sel=id;persist();syncRecord();show('record')}
+function syncRecord(){let v=cur();if(!v){rempty.classList.remove('hidden');rdata.classList.add('hidden');return}rempty.classList.add('hidden');rdata.classList.remove('hidden');rname.textContent=v.name;rstatus.textContent=v.status;rdetails.innerHTML=[['Year',v.year],['Make',v.make],['Model',v.model],['Chassis/VIN',v.chassis],['Engine',v.engine],['Registration',v.reg],['Notes',v.notes]].filter(x=>x[1]).map(x=>`<b>${x[0]}:</b> ${esc(x[1])}<br>`).join('')||'No structured details yet.';revidence.innerHTML=(v.evidence||[]).map(e=>`<div class="ev"><b>${esc(e.claim)}</b><br><span class="small">${esc(e.source)}</span><br><span class="tag ${e.status?.toLowerCase().includes('ai')||e.status?.toLowerCase().includes('ocr')?'infer':'owner'}">${esc(e.status)}</span>${e.observed?`<div class="small"><b>Observed:</b> ${esc(typeof e.observed==='string'?e.observed:JSON.stringify(e.observed))}</div>`:''}${e.interpretation?`<div class="small"><b>Interpretation:</b> ${esc(typeof e.interpretation==='string'?e.interpretation:JSON.stringify(e.interpretation))}</div>`:''}</div>`).join('')}
+function delCar(){let v=cur();if(!v)return;if(!confirm('Delete this pilot vehicle?'))return;cars=cars.filter(x=>x.id!==v.id);sel=cars[0]?.id||'';persist();goHome()}
+function startScan(m){if(!cars.length){alert('Create the vehicle manually first so evidence has a specific record to attach to.');return show('manual')}if(!cur()){sel=cars[0].id;persist()}mode=m;last=null;pic.value='';result.innerHTML='';msg.innerHTML='';let x={vehicle_photo:['AI Vehicle Photo','AI will suggest possible identity. It remains an unverified inference.'],identifier_plate:['OCR Identity Plate','OCR will preserve observed text and uncertainty. You confirm/correct before use.'],document:['Document Analysis','Possible claims remain linked to the document source.']}[m];scanTitle.textContent=x[0];scanHead.textContent=x[0];scanText.textContent=x[1];show('scan')}
+const file64=f=>new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(f)});
+async function analyse(){let f=pic.files[0];if(!f)return alert('Take or select a photo.');msg.innerHTML='<span class="spinner"></span> Analysing…';result.innerHTML='';try{let b=await file64(f),v=cur();let {data,error}=await sb.functions.invoke('heritage-ai',{body:{mode,image_base64:b,context:v?{name:v.name,year:v.year,make:v.make,model:v.model,chassis:v.chassis}:null}});if(error)throw error;last=data;msg.textContent='Result returned. Review before accepting.';showResult(data)}catch(e){msg.textContent='Analysis failed: '+e.message}}
+function pick(o,ks){for(let k of ks)if(o&&o[k]!=null&&o[k]!=='')return o[k];return null}
+function showResult(data){let o=data?.result||data,h='<div class="panel evidence"><span class="tag infer">'+esc(pick(o,['status'])||'AI/OCR result — review required')+'</span>';if(mode==='identifier_plate'){let t=pick(o,['exact_observed_text','exactObservedText','observed_text','text'])||JSON.stringify(o);h+=`<h2>OCR reading</h2><p class="small">${esc(typeof t==='string'?t:JSON.stringify(t))}</p><label>Your confirmed/corrected reading</label><input id="corr"><button class="primary" style="margin-top:12px" onclick="acceptOcr()">Add OCR evidence</button>`}else if(mode==='vehicle_photo'){let make=pick(o,['possible_make','make']),model=pick(o,['possible_model','model']),yr=pick(o,['approximate_year_or_year_range','year_range','year']);h+=`<h2>${esc([make,model].filter(Boolean).join(' ')||'Possible identification')}</h2><p class="small">Year/range: ${esc(yr||'—')}</p><pre class="small">${esc(JSON.stringify(o,null,2))}</pre><button class="primary" onclick="acceptAI()">Add as working hypothesis</button>`}else{h+=`<h2>Document-derived claims</h2><pre class="small">${esc(JSON.stringify(o,null,2))}</pre><button class="primary" onclick="acceptDoc()">Add document evidence</button>`}h+='<button class="secondary" onclick="result.innerHTML=\'\';last=null">Reject / discard</button></div>';result.innerHTML=h}
+function acceptOcr(){let v=cur(),o=last?.result||last,t=pick(o,['exact_observed_text','exactObservedText','observed_text','text'])||JSON.stringify(o),c=corr.value.trim();v.evidence.push({claim:'Identifier plate reading',source:'OCR analysis of plate photo',status:'OCR observation — owner confirmation required',observed:t,interpretation:c?{owner_confirmed_or_corrected_reading:c}:null});if(c&&!v.chassis)v.chassis=c;v.status=c?'OCR reviewed by owner — not independently verified':'OCR evidence added — confirmation pending';persist();syncRecord();show('record')}
+function acceptAI(){let v=cur(),o=last?.result||last,make=pick(o,['possible_make','make']),model=pick(o,['possible_model','model']),yr=pick(o,['approximate_year_or_year_range','year_range','year']);v.evidence.push({claim:'Possible vehicle identity',source:'AI analysis of vehicle photo',status:'AI visual inference — not verified',observed:last,interpretation:{make,model,year_or_range:yr}});if(!v.make&&make)v.make=String(make);if(!v.model&&model)v.model=String(model);if(!v.year&&yr)v.year=String(yr);v.status='AI evidence added — human review required';persist();syncRecord();show('record')}
+function acceptDoc(){let v=cur();v.evidence.push({claim:'Document-derived vehicle information',source:'AI analysis of document image',status:'Document-derived claim — not independently verified',observed:last});v.status='Document evidence analysed — not independently verified';persist();syncRecord();show('record')}
+boot();
+</script></body></html>
