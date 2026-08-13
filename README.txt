@@ -10,3 +10,7 @@ HERITAGE GARAGE PRIVATE PILOT V4
 - AI/OCR never silently becomes historical fact
 Pilot limitation: vehicle/evidence records are still local to each browser/device. Next step is cloud database + RLS sync.
 Never put OPENAI_API_KEY in the app.
+
+
+VERSION 4 FIXED PHOTO LIBRARY
+AI/photo identification now allows choosing an existing photo from the iPhone/iPad photo library. Camera-only capture has been removed.

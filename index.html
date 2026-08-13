@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><head>
+<!doctype html>
+<!-- Heritage Garage Version 4 FIXED: photo library enabled; camera-only capture removed --><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0d2f27"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Heritage Garage">
@@ -53,7 +54,7 @@ label{display:block;color:var(--gold);font-size:11px;text-transform:uppercase;ma
 <div class="panel"><span class="tag owner">Owner supplied</span><label>Vehicle name *</label><input id="n"><label>Year</label><input id="y"><label>Make</label><input id="mk"><label>Model</label><input id="mo"><label>Chassis / VIN</label><input id="ch"><label>Engine</label><input id="en"><label>Registration</label><input id="rg"><label>Notes</label><textarea id="nt"></textarea><button class="primary" style="margin-top:14px" onclick="saveManual()">Save Vehicle</button></div></div>
 
 <div id="scan" class="section"><div class="top"><button class="back" onclick="show('add')">‹ Back</button><h1 id="scanTitle">AI / OCR</h1></div>
-<div class="panel"><div class="k">Evidence capture</div><h2 id="scanHead"></h2><p id="scanText" class="small"></p><input id="pic" type="file" accept="image/*" capture="environment" style="margin:14px 0;width:100%"><button class="primary" onclick="analyse()">Analyse Evidence</button><div id="msg" class="small" style="margin-top:10px"></div></div><div id="result"></div></div>
+<div class="panel"><div class="k">Evidence</div><h2 id="scanHead"></h2><p id="scanText" class="small"></p><input id="pic" type="file" accept="image/*" style="margin:14px 0;width:100%"><button class="primary" onclick="analyse()">Analyse Evidence</button><div id="msg" class="small" style="margin-top:10px"></div></div><div id="result"></div></div>
 
 <div id="record" class="section"><div class="top"><button class="back" onclick="goHome()">‹ Back</button><h1>Vehicle Record</h1></div>
 <div id="rempty" class="empty">Select or add a vehicle first.</div><div id="rdata" class="hidden"><div class="panel"><div class="k">Vehicle identity</div><h2 id="rname"></h2><div id="rstatus" class="status"></div></div><div class="panel"><div class="k">Recorded details</div><div id="rdetails" class="small"></div></div><div class="panel evidence"><div class="k">Evidence ledger</div><div id="revidence"></div></div><button class="danger" onclick="delCar()">Delete pilot vehicle</button></div></div>
