@@ -1,16 +1,10 @@
-HERITAGE GARAGE PRIVATE PILOT V4
-- Supabase email/password login
-- Two real vehicles maximum
-- Manual vehicle entry
-- Genuine AI vehicle-photo analysis via heritage-ai
-- Genuine OCR plate analysis via heritage-ai
-- Document image analysis
-- Evidence ledger with source/status
-- Confirm/correct OCR while preserving original OCR observation
-- AI/OCR never silently becomes historical fact
-Pilot limitation: vehicle/evidence records are still local to each browser/device. Next step is cloud database + RLS sync.
-Never put OPENAI_API_KEY in the app.
+HERITAGE GARAGE PRIVATE PILOT V4 — HGV2
 
+Changes in HGV2:
+- Adds a clear Edit Vehicle button on the Vehicle Record screen.
+- Allows editing vehicle name, year, make, model, body style, chassis/VIN, engine, registration and notes.
+- Editing does not erase prior information silently: every changed field is preserved in the Evidence Ledger with its previous and updated value and edit timestamp.
+- Keeps the photo-library fix from HGV1.
+- Does not alter the deferred heritage-ai Edge Function issue.
 
-VERSION 4 FIXED PHOTO LIBRARY
-AI/photo identification now allows choosing an existing photo from the iPhone/iPad photo library. Camera-only capture has been removed.
+Upload these files to the existing Heritage Garage GitHub repository, replacing the matching files from HGV1.
