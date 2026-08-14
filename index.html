@@ -1,15 +1,15 @@
 <!doctype html>
-<!-- Heritage Garage Version 4 HGV2: photo library enabled; provenance-safe vehicle editing added --><html lang="en"><head>
+<!-- Heritage Garage Version 4 HGV3: photo library enabled; provenance-safe vehicle editing added --><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0d2f27"><meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Heritage Garage">
+<meta name="apple-mobile-web-app-title" content="Heritage Garage HGV3">
 <link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><title>Heritage Garage</title>
 <style>
 :root{--bg:#0d110f;--p:#161c18;--g:#183a30;--g2:#245343;--gold:#c8a96b;--c:#efe5d2;--m:#aab0ab;--l:#304138}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--c);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 button,input,textarea{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding:calc(22px + env(safe-area-inset-top)) 18px calc(145px + env(safe-area-inset-bottom))}
-.brand{display:flex;gap:14px;align-items:center;margin-bottom:20px}.logo{width:62px;height:62px;border:2px solid var(--gold);border-radius:20px;display:grid;place-items:center;color:var(--gold);font:700 29px Georgia,serif}
+.brand{display:flex;gap:14px;align-items:center;margin-bottom:20px}.logo{width:62px;height:62px;border:2px solid var(--gold);border-radius:20px;display:grid;place-items:center;color:var(--gold);font:700 19px Georgia,serif;letter-spacing:-.04em}
 h1,h2{font-family:Georgia,serif}h1{margin:0}.sub,.small{color:var(--m);font-size:13px;line-height:1.45}.hero,.panel,.vehicle,.method{background:var(--p);border:1px solid var(--l);border-radius:19px;padding:16px;margin-bottom:12px}.hero{background:linear-gradient(145deg,var(--g2),#10251e)}.k{color:var(--gold);font-size:11px;letter-spacing:.13em;text-transform:uppercase}.hero h2{margin:7px 0;font-size:28px}.hero p{margin:0;color:#d9d6ce}
 .primary,.secondary,.danger{width:100%;padding:14px;border-radius:14px;font-weight:650}.primary{background:var(--g);border:1px solid var(--gold);color:var(--c)}.secondary{margin-top:9px;background:var(--p);border:1px solid var(--l);color:var(--c)}.danger{margin-top:9px;background:#3b211e;border:1px solid #77443d;color:#ffd8d2}
 label{display:block;color:var(--gold);font-size:11px;text-transform:uppercase;margin:13px 0 5px}input,textarea{width:100%;padding:12px;border-radius:11px;border:1px solid var(--l);background:#111713;color:var(--c)}textarea{min-height:76px}
@@ -23,20 +23,20 @@ label{display:block;color:var(--gold);font-size:11px;text-transform:uppercase;ma
 </style></head><body>
 <div class="app">
 <div id="setup">
-  <div class="brand"><div class="logo">HG</div><div><h1>Heritage Garage</h1><div class="sub">Private Pilot V4</div></div></div>
+  <div class="brand"><div class="logo">HGV3</div><div><h1>Heritage Garage</h1><div class="sub">Private Pilot V4</div></div></div>
   <div class="hero"><div class="k">One-time setup</div><h2>Connect Supabase</h2><p>Paste the project URL and browser-safe publishable key. Never paste your OpenAI secret here.</p></div>
   <div class="panel"><label>Supabase Project URL</label><input id="cfgUrl" placeholder="https://xxxxx.supabase.co" autocapitalize="none"><label>Publishable key</label><textarea id="cfgKey" placeholder="sb_publishable_..." autocapitalize="none"></textarea><button class="primary" style="margin-top:14px" onclick="saveCfg()">Save & Connect</button></div>
 </div>
 
 <div id="login" class="hidden">
- <div class="brand"><div class="logo">HG</div><div><h1>Heritage Garage</h1><div class="sub">Private Pilot V4</div></div></div>
+ <div class="brand"><div class="logo">HGV3</div><div><h1>Heritage Garage</h1><div class="sub">Private Pilot V4</div></div></div>
  <div class="hero"><div class="k">Private collection</div><h2>Sign in</h2><p>Use the Supabase user account created for the pilot.</p></div>
  <div class="panel"><label>Email</label><input id="email" type="email"><label>Password</label><input id="pw" type="password"><button class="primary" style="margin-top:14px" onclick="signIn()">Sign In</button><div id="loginMsg" class="small" style="margin-top:10px"></div><button class="secondary" onclick="resetCfg()">Backend Settings</button></div>
 </div>
 
 <div id="main" class="hidden">
 <div id="home">
- <div class="brand"><div class="logo">HG</div><div><h1>Heritage Garage</h1><div class="sub">An evidence-based record of a vehicle's history.</div></div></div>
+ <div class="brand"><div class="logo">HGV3</div><div><h1>Heritage Garage</h1><div class="sub">An evidence-based record of a vehicle's history.</div></div></div>
  <div class="hero"><div class="k">Two-vehicle pilot</div><h2>My Garage</h2><p>Real AI/OCR, but every inference remains evidence—not fact—until reviewed.</p></div>
  <div id="garage"></div><button id="addBtn" class="primary" onclick="show('add')">＋ Add Vehicle</button>
  <div class="panel" style="margin-top:16px"><div class="k">Core principle</div><p class="small">Heritage Garage never silently turns an educated guess, AI suggestion or OCR reading into historical fact.</p></div>
