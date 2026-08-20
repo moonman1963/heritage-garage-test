@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Heritage Garage Version 4 HGV3: photo library enabled; provenance-safe vehicle editing added --><html lang="en"><head>
+<!-- Heritage Garage Version 4 HGV3: photo library enabled; provenance-safe vehicle editing added; direct Supabase login configured --><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0d2f27"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Heritage Garage HGV3">
@@ -22,16 +22,12 @@ label{display:block;color:var(--gold);font-size:11px;text-transform:uppercase;ma
 .spinner{display:inline-block;width:15px;height:15px;border:2px solid #66786d;border-top-color:var(--gold);border-radius:50%;animation:s .8s linear infinite;vertical-align:-3px}@keyframes s{to{transform:rotate(360deg)}}pre{white-space:pre-wrap;word-break:break-word}
 </style></head><body>
 <div class="app">
-<div id="setup">
-  <div class="brand"><div class="logo">HGV3</div><div><h1>Heritage Garage</h1><div class="sub">Private Pilot V4</div></div></div>
-  <div class="hero"><div class="k">One-time setup</div><h2>Connect Supabase</h2><p>Paste the project URL and browser-safe publishable key. Never paste your OpenAI secret here.</p></div>
-  <div class="panel"><label>Supabase Project URL</label><input id="cfgUrl" placeholder="https://xxxxx.supabase.co" autocapitalize="none"><label>Publishable key</label><textarea id="cfgKey" placeholder="sb_publishable_..." autocapitalize="none"></textarea><button class="primary" style="margin-top:14px" onclick="saveCfg()">Save & Connect</button></div>
-</div>
+<div id="setup" class="hidden"></div>
 
 <div id="login" class="hidden">
  <div class="brand"><div class="logo">HGV3</div><div><h1>Heritage Garage</h1><div class="sub">Private Pilot V4</div></div></div>
- <div class="hero"><div class="k">Private collection</div><h2>Sign in</h2><p>Use the Supabase user account created for the pilot.</p></div>
- <div class="panel"><label>Email</label><input id="email" type="email"><label>Password</label><input id="pw" type="password"><button class="primary" style="margin-top:14px" onclick="signIn()">Sign In</button><div id="loginMsg" class="small" style="margin-top:10px"></div><button class="secondary" onclick="resetCfg()">Backend Settings</button></div>
+ <div class="hero"><div class="k">Private collection</div><h2>Sign in</h2><p>Use your Heritage Garage pilot account.</p></div>
+ <div class="panel"><label>Email</label><input id="email" type="email"><label>Password</label><input id="pw" type="password"><button class="primary" style="margin-top:14px" onclick="signIn()">Sign In</button><div id="loginMsg" class="small" style="margin-top:10px"></div></div>
 </div>
 
 <div id="main" class="hidden">
@@ -67,13 +63,12 @@ label{display:block;color:var(--gold);font-size:11px;text-transform:uppercase;ma
 <div id="nav" class="nav hidden"><div class="navin"><button onclick="goHome()"><strong>⌂</strong>Garage</button><button onclick="show('add')"><strong>＋</strong>Add</button><button onclick="show('record');syncRecord()"><strong>♜</strong>Record</button><button onclick="alert('Independent club certification comes later.')"><strong>✓</strong>Provenance</button></div></div>
 
 <script>
-const CK='hg4cfg',VK='hg4cars',SK='hg4sel';let sb=null,cars=[],sel='',mode='',last=null;
+const SUPABASE_URL='https://xwonoqlmmtawlhuhohyi.supabase.co';
+const SUPABASE_KEY='sb_publishable_3PqRa7cgTGqf0WuuB-zPWg_n_0YtlSI';
+const VK='hg4cars',SK='hg4sel';let sb=null,cars=[],sel='',mode='',last=null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-function cfg(){try{return JSON.parse(localStorage.getItem(CK)||'null')}catch(e){return null}}
-function saveCfg(){let u=cfgUrl.value.trim(),k=cfgKey.value.trim();if(!u||!k){alert('Enter both Supabase values.');return}localStorage.setItem(CK,JSON.stringify({u,k}));boot()}
-function resetCfg(){localStorage.removeItem(CK);location.reload()}
-function makeSb(){let c=cfg();sb=window.supabase.createClient(c.u,c.k,{auth:{persistSession:true,autoRefreshToken:true}})}
-async function boot(){let c=cfg();if(!c)return;setup.classList.add('hidden');makeSb();let {data:{session}}=await sb.auth.getSession();if(session)enter();else login.classList.remove('hidden')}
+function makeSb(){sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true}})}
+async function boot(){setup.classList.add('hidden');makeSb();let {data:{session},error}=await sb.auth.getSession();if(error){login.classList.remove('hidden');loginMsg.textContent=error.message;return}if(session)enter();else login.classList.remove('hidden')}
 async function signIn(){loginMsg.innerHTML='<span class="spinner"></span> Signing in…';let {error}=await sb.auth.signInWithPassword({email:email.value.trim(),password:pw.value});if(error){loginMsg.textContent=error.message;return}enter()}
 async function signOut(){await sb.auth.signOut();location.reload()}
 function enter(){login.classList.add('hidden');main.classList.remove('hidden');nav.classList.remove('hidden');load();goHome()}
