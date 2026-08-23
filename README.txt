@@ -17,3 +17,5 @@ Architecture rules:
 - Permanent vehicle record data is distinct from private owner workspace data.
 
 This branch is a fresh implementation. The previous HGV3 pilot on main is retained only for historical reference.
+
+Deployment note: preview trigger 2026-08-23.
