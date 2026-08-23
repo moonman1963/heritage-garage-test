@@ -1,12 +1,19 @@
-HERITAGE GARAGE PRIVATE PILOT V4 — HGV3
+HERITAGE PROTOTYPE v0.1 — CLEAN REBUILD
 
-Changes in HGV3:
-- Adds a clear Edit Vehicle button on the Vehicle Record screen.
-- Allows editing vehicle name, year, make, model, body style, chassis/VIN, engine, registration and notes.
-- Editing does not erase prior information silently: every changed field is preserved in the Evidence Ledger with its previous and updated value and edit timestamp.
-- Keeps the photo-library fix from HGV1.
-- Does not alter the deferred heritage-ai Edge Function issue.
+Branch: rebuild-v0.1
+Backend: Supabase development branch rebuild-v0-1
 
-Upload these files to the existing Heritage Garage GitHub repository, replacing the matching files from HGV1.
+Scope:
+- Flow 1: Sign in / account entry
+- Flow 2: Add Vehicle with required Unknown handling, relationship, identity check, privacy, final duplicate recheck and permanent Heritage ID + QR
+- Flow 3: Garage + Vehicle Overview hub with Record, Manage, Use & Share and People destinations
 
-HGV3 icon/branding: app header and install icons visibly marked HGV3.
+Architecture rules:
+- One vehicle = one permanent Heritage identity.
+- QR identity is permanent; visibility changes what scanners see, not the QR.
+- Exact identity matches block duplicate creation.
+- Provenance claims are source-labelled.
+- Vehicle role and permissions remain separate concepts.
+- Permanent vehicle record data is distinct from private owner workspace data.
+
+This branch is a fresh implementation. The previous HGV3 pilot on main is retained only for historical reference.
