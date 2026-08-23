@@ -89,6 +89,16 @@ Backend: Supabase development branch `rebuild-v0-1`
 - Verified chassis/registration/year evidence now materially raises Identity Confidence; the earlier contradiction where several Government Confirmed identifiers could coexist with a very low score is no longer structurally possible.
 - Record Completeness remains a separate measure of how much information is present and is not used as a proxy for confidence.
 
+### Record Completeness consistency
+
+- Record Completeness now has one backend formula with five sections that total exactly 100 points: Core Identity 45, Provenance/Evidence 20, Documents 20, Media 10, Profile Context 5.
+- Core Identity awards explicit credit for known-or-explicitly-unknown Make, Model and Year, plus chassis/VIN and registration where supplied.
+- Provenance/Evidence, Documents and Media add capped credit as records are added; Profile Context covers vehicle name, general current location and project context.
+- `get_record_completeness_breakdown(vehicle_id)` returns each component, the total, the fixed maximum of 100 and the Low Information threshold.
+- `record_completeness` is recalculated automatically when relevant vehicle fields, vehicle facts, documents or media change.
+- The Low Information flag is triggered from the same stored completeness score at `<35` and automatically cleared at `>=35`; a 95%/Very Good record therefore cannot simultaneously carry Low Information.
+- There is no separate “missing 5% excluded” arithmetic. All five sections are part of the 100-point denominator, eliminating the earlier 95-vs-100 wording contradiction.
+
 ## Backend invariants now enforced
 
 - RLS enabled on core vehicle/role/fact/dispute/visibility structures.
@@ -101,6 +111,7 @@ Backend: Supabase development branch `rebuild-v0-1`
 - Duplicate active workflow flags are prevented at database level.
 - Conflicting simultaneous active facts for the same vehicle field are prevented at database level.
 - Identity weighting has been arithmetically checked to total 100.
+- Record Completeness weighting has been arithmetically checked to total 100.
 
 ## Current test-data state
 
