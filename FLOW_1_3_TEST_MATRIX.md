@@ -75,6 +75,20 @@ Backend: Supabase development branch `rebuild-v0-1`
 - Only one active flag of a given type may exist per vehicle.
 - Only one active canonical fact per vehicle/field may exist across `current`, `disputed` and `under_review`, preventing registration/year/source-tier contradictions across screens.
 
+### Confidence metric consistency
+
+- Identity Confidence is now calculated from one backend rule rather than being independently entered by different screens.
+- Canonical identity-field weights total exactly 100: chassis/VIN 30, registration 20, year 15, engine 10, body 5, make 10, model 10.
+- Source confidence is consistent with the five-tier vocabulary: Government Confirmed 100%, Club Confirmed 85%, User Contributed 55%, System 40%, Unverified 25%.
+- Direct vehicle-entry values start as User Contributed unless a canonical fact upgrades them.
+- `under_review` identity facts are discounted to 65% of their source score and `disputed` facts to 40%, so a disputed Government claim cannot continue to look fully verified.
+- Provenance Confidence is calculated from non-identity provenance facts plus sourced documents using the same source-tier scores and review/dispute discounts.
+- Fact and document changes automatically refresh the relevant confidence metrics.
+- Direct identity edits automatically refresh Identity Confidence.
+- `get_vehicle_confidence_breakdown(vehicle_id)` exposes both scores plus the rule used, so tooltips/details can explain why the number exists.
+- Verified chassis/registration/year evidence now materially raises Identity Confidence; the earlier contradiction where several Government Confirmed identifiers could coexist with a very low score is no longer structurally possible.
+- Record Completeness remains a separate measure of how much information is present and is not used as a proxy for confidence.
+
 ## Backend invariants now enforced
 
 - RLS enabled on core vehicle/role/fact/dispute/visibility structures.
@@ -86,6 +100,7 @@ Backend: Supabase development branch `rebuild-v0-1`
 - Core foreign keys are indexed for expected growth.
 - Duplicate active workflow flags are prevented at database level.
 - Conflicting simultaneous active facts for the same vehicle field are prevented at database level.
+- Identity weighting has been arithmetically checked to total 100.
 
 ## Current test-data state
 
