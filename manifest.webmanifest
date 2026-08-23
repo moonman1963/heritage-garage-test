@@ -1,15 +1,11 @@
 {
-  "name": "Heritage Garage",
-  "short_name": "HG HGV3",
+  "name": "Heritage Garage Prototype",
+  "short_name": "Heritage",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#0d110f",
-  "theme_color": "#0d2f27",
+  "background_color": "#0b100e",
+  "theme_color": "#0b1f1a",
   "icons": [
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png"}
   ]
 }
