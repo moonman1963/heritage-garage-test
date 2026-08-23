@@ -41,20 +41,19 @@ Backend: Supabase development branch `rebuild-v0-1`
 - Claim/request-access and hold-for-review deliberately pause new-record creation.
 - Final check sends newly discovered exact/possible matches back to Duplicate Check.
 - Database has a normalized chassis uniqueness guard as the last line of defence.
-- Duplicate RPC now considers registration even when a chassis value was supplied; registration is a review signal, not silently treated as permanent exact identity.
+- Duplicate RPC considers registration even when chassis is supplied; registration remains a review signal rather than silently becoming permanent exact identity.
 
 ### Atomic creation
 
 - Vehicle and initial relationship are created by one RPC transaction.
 - Failure of either operation rolls the transaction back.
-- Initial relationship policy now supports Owner, Co-owner, Manager/Trustee or Family/Representative for the record creator.
+- Initial relationship policy supports Owner, Co-owner, Manager/Trustee or Family/Representative for the record creator.
 - `created_by` is derived from authenticated user identity server-side.
 
 ## Flow 3 — Vehicle home
 
 - Vehicle Overview receives the saved permanent Heritage ID and QR token.
 - Completeness, Identity Confidence and Provenance Confidence are separate metrics.
-- Low Information is only shown below the prototype threshold.
 - Record / Manage / Use & Share / People routes are distinct.
 - Story, Provenance, Documents, Media, Maintenance, Projects, Costs/Valuation, Journeys, Market, Transfer and People destinations are wired.
 - Provenance explains claim challenge/review behaviour.
@@ -62,6 +61,19 @@ Backend: Supabase development branch `rebuild-v0-1`
 - QR is generated from the permanent vehicle QR token, not a placeholder pattern.
 - Private vehicles do not silently create a public share link.
 - Physical Badge entry is under QR & Sharing and pairs to the existing Vehicle ID.
+
+### Flow 3 state consistency
+
+- `get_vehicle_dashboard_state(vehicle_id)` is the single backend source for Needs Attention, pending disputes, pending transfer and recent activity.
+- `attention_count` is generated from the same active-flag collection shown to the user, preventing count/card drift.
+- Attention items are priority ordered: dispute, identity review, transfer, estate review, maintenance, insurance, document expiry, low information.
+- Pending-transfer state includes explicit restrictions: no second transfer and no permanent-identity changes while pending.
+- Pending disputes automatically create/clear the `pending_dispute` vehicle flag.
+- Ownership transfers automatically create/clear the `transfer_pending` vehicle flag.
+- Low-information flag is synchronized from Record Completeness rather than independently calculated by different screens.
+- Dispute and transfer workflow changes create activity events, so consequential status changes cannot exist only as badges.
+- Only one active flag of a given type may exist per vehicle.
+- Only one active canonical fact per vehicle/field may exist across `current`, `disputed` and `under_review`, preventing registration/year/source-tier contradictions across screens.
 
 ## Backend invariants now enforced
 
@@ -72,6 +84,13 @@ Backend: Supabase development branch `rebuild-v0-1`
 - Year range constrained.
 - Era Category / Year consistency enforced, with Special Interest as the flexible exception.
 - Core foreign keys are indexed for expected growth.
+- Duplicate active workflow flags are prevented at database level.
+- Conflicting simultaneous active facts for the same vehicle field are prevented at database level.
+
+## Current test-data state
+
+- Supabase development branch is currently empty of user vehicle records, so schema/RLS/workflow tests are non-destructive.
+- End-to-end authenticated write testing will be completed with a dedicated test account or during the later device acceptance pass; demo mode remains available without login.
 
 ## Deferred acceptance work
 
